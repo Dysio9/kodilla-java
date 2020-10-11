@@ -24,19 +24,20 @@ class ShapeCollectorTestSuite {
         @Test
         public void testAddFigureToEmptyBase() {
             //Given
-            shapeCollector = new ShapeCollector(new Circle());
+            shapeCollector = new ShapeCollector();
 
             //When
+            shapeCollector.addFigure(new Circle());
 
             //Then
-            assertEquals(new Circle(), shapeCollector.getFigure(0));
+            assertEquals("Circle", shapeCollector.getFigure(0).getShapeName());
         }
 
         @DisplayName("Test of adding new figure to base with some records")
         @Test
         public void testAddNextFigure() {
             //Given
-            shapeCollector = new ShapeCollector(new Circle());
+            shapeCollector = new ShapeCollector();
 
             //When
             shapeCollector.addFigure(new Circle());
@@ -57,7 +58,7 @@ class ShapeCollectorTestSuite {
         @Test
         public void testRemoveFigure() {
             //Given
-            shapeCollector = new ShapeCollector(new Circle());
+            shapeCollector = new ShapeCollector();
 
             //When
             shapeCollector.addFigure(new Circle());
@@ -75,10 +76,10 @@ class ShapeCollectorTestSuite {
         @Test
         public void testRemoveFigureEmptyBase() {
             //Given
-            shapeCollector = new ShapeCollector(new Circle());
+            shapeCollector = new ShapeCollector();
+            shapeCollector.addFigure(new Circle());
 
             //When
-            shapeCollector.removeFigure(new Circle());
             boolean result = shapeCollector.removeFigure(new Circle());
 
             //Then
@@ -92,7 +93,7 @@ class ShapeCollectorTestSuite {
         @Test
         public void testGetFigure1stPosition() {
             //Given
-            shapeCollector = new ShapeCollector(new Triangle());
+            shapeCollector = new ShapeCollector();
 
             //When
             shapeCollector.addFigure(new Circle());
@@ -101,14 +102,14 @@ class ShapeCollectorTestSuite {
             shapeCollector.addFigure(new Square());
 
             //Then
-            assertEquals(new Triangle(), shapeCollector.getFigure(0));
+            assertEquals("Circle", shapeCollector.getFigure(0).getShapeName());
         }
 
         @DisplayName("Test of getting figure from 4th position")
         @Test
         public void testGetFigure3rdPosition() {
             //Given
-            shapeCollector = new ShapeCollector(new Triangle());
+            shapeCollector = new ShapeCollector();
 
             //When
             shapeCollector.addFigure(new Circle());
@@ -118,17 +119,16 @@ class ShapeCollectorTestSuite {
             shapeCollector.addFigure(new Square());
 
             //Then
-            assertEquals(new Triangle(), shapeCollector.getFigure(3));
+            assertEquals("Circle", shapeCollector.getFigure(3).getShapeName());
         }
 
         @DisplayName("Test of getting figure from empty base")
         @Test
         public void testGetFigureEmptyBase() {
             //Given
-            shapeCollector = new ShapeCollector(new Square());
+            shapeCollector = new ShapeCollector();
 
             //When
-            shapeCollector.removeFigure(new Square());
 
             //Then
             assertNull(shapeCollector.getFigure(0));
@@ -141,7 +141,7 @@ class ShapeCollectorTestSuite {
         @Test
         public void testShowFigures() {
             //Given
-            shapeCollector = new ShapeCollector(new Circle());
+            shapeCollector = new ShapeCollector();
 
             //When
             shapeCollector.addFigure(new Circle());
@@ -151,14 +151,14 @@ class ShapeCollectorTestSuite {
             shapeCollector.addFigure(new Square());
 
             //Then
-            assertEquals("Circle Circle Square Triangle Circle Square", shapeCollector.showFigures());
+            assertEquals("Circle Square Triangle Circle Square", shapeCollector.showFigures());
         }
 
         @DisplayName("Test of showing figures from empty base")
         @Test
         public void testShowFiguresEmptyBase() {
             //Given
-            shapeCollector = new ShapeCollector(new Circle());
+            shapeCollector = new ShapeCollector();
 
             //When
             shapeCollector.removeFigure(new Circle());
