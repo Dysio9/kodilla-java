@@ -4,6 +4,7 @@ import com.kodilla.testing.weather.stub.Temperatures;
 import com.kodilla.testing.weather.stub.WeatherForecast;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -19,6 +20,9 @@ class WeatherForecastTestSuite {
     @Mock
     private static Temperatures temperaturesMock;
 
+    @InjectMocks
+    WeatherForecast weatherForecast;
+
     @BeforeEach
     void createTemperaturesMap() {
         Map<String, Double> temperaturesMap;
@@ -33,9 +37,9 @@ class WeatherForecastTestSuite {
 
 
     @Test
-    void testCalculateForecastWithMock() {
+    void testCalculateForecast() {
         //Given
-        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
+//        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
         int quantityOfSensors = weatherForecast.calculateForecast().size();
@@ -45,16 +49,15 @@ class WeatherForecastTestSuite {
     }
 
     @Test
-    void testMeanValueOfTemperatureWithMock() {
+    void testMeanValueOfTemperature() {
         //Given
-        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
+//        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
         Double sumOfTemperatures = 0.0;
         for (Double temperatureValue : weatherForecast.calculateForecast().values()) {
             sumOfTemperatures += temperatureValue;
         }
-        //weatherForecast.calculateForecast().values().a
         double meanValueOfTemperature = sumOfTemperatures / weatherForecast.calculateForecast().size();
 
         //zaokrąglenie wyniku z weatherForecast ponieważ wychodziło jakieś 26.560000000000002
@@ -67,9 +70,9 @@ class WeatherForecastTestSuite {
     }
 
     @Test
-    void testMedianOfTemperatureWithMock() {
+    void testMedianOfTemperature() {
         //Given
-        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
+//        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
         Double medianValueOfTemperature;
