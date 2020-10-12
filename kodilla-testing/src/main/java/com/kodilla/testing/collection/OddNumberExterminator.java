@@ -6,7 +6,7 @@ import java.util.List;
 public class OddNumberExterminator {
     public List<Integer> numbers(List<Integer> numbers) {
         if (numbers == null) {
-            return null;
+            throw new IllegalArgumentException();
         }
 
         List<Integer> resultList = new ArrayList<>();
