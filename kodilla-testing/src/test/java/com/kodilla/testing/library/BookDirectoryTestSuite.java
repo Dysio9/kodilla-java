@@ -2,6 +2,8 @@ package com.kodilla.testing.library;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -46,37 +48,19 @@ class BookDirectoryTestSuite {
 
     }
 
-    private List<Book> generateListOfNBooks(int booksQuantity) {
-        List<Book> resultList = new ArrayList<>();
-        for (int n = 1; n <= booksQuantity; n++){
-            Book theBook = new Book("Title " + n, "Author " + n, 1970 + n);
-            resultList.add(theBook);
-        }
-        return resultList;
-    }
-
-    @Test
-    void testListBooksWithConditionMoreThan20() {
+    @ParameterizedTest
+    @CsvSource({"ZeroBooks,0,0", "Any title,15,15", "FortyBooks,40,0"})
+    void testListBooksWithConditionMoreThan20(String bookName, int booksInBase, int expected) {
         // Given
-        List<Book> resultListOf0Books = new ArrayList<>();
-        List<Book> resultListOf15Books = generateListOfNBooks(15);
-        List<Book> resultListOf40Books = generateListOfNBooks(40);
-        when(libraryDatabaseMock.listBooksWithCondition(anyString()))
-                .thenReturn(resultListOf15Books);
-        when(libraryDatabaseMock.listBooksWithCondition("ZeroBooks"))
-                .thenReturn(resultListOf0Books);
-        when(libraryDatabaseMock.listBooksWithCondition("FortyBooks"))
-                .thenReturn(resultListOf40Books);
+        List<Book> resultListOfBooks = generateListOfNBooks(booksInBase);
+        when(libraryDatabaseMock.listBooksWithCondition(bookName))
+                .thenReturn(resultListOfBooks);
 
         // When
-        List<Book> theListOfBooks0 = bookLibrary.listBooksWithCondition("ZeroBooks");
-        List<Book> theListOfBooks15 = bookLibrary.listBooksWithCondition("Any title");
-        List<Book> theListOfBooks40 = bookLibrary.listBooksWithCondition("FortyBooks");
+        List<Book> theListOfBooks = bookLibrary.listBooksWithCondition(bookName);
 
         // Then
-        assertEquals(0, theListOfBooks0.size());
-        assertEquals(15, theListOfBooks15.size());
-        assertEquals(0, theListOfBooks40.size());
+        assertEquals(expected, theListOfBooks.size());
     }
 
 
@@ -132,5 +116,14 @@ class BookDirectoryTestSuite {
 
         //Then
         assertEquals(5, booksInHandsList5.size());
+    }
+
+    private List<Book> generateListOfNBooks(int booksQuantity) {
+        List<Book> resultList = new ArrayList<>();
+        for (int n = 1; n <= booksQuantity; n++){
+            Book theBook = new Book("Title " + n, "Author " + n, 1970 + n);
+            resultList.add(theBook);
+        }
+        return resultList;
     }
 }
