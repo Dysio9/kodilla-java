@@ -38,9 +38,6 @@ class WeatherForecastTestSuite {
 
     @Test
     void testCalculateForecast() {
-        //Given
-//        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
-
         //When
         int quantityOfSensors = weatherForecast.calculateForecast().size();
 
@@ -50,9 +47,6 @@ class WeatherForecastTestSuite {
 
     @Test
     void testMeanValueOfTemperature() {
-        //Given
-//        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
-
         //When
         Double sumOfTemperatures = 0.0;
         for (Double temperatureValue : weatherForecast.calculateForecast().values()) {
@@ -71,9 +65,6 @@ class WeatherForecastTestSuite {
 
     @Test
     void testMedianOfTemperature() {
-        //Given
-//        WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
-
         //When
         Double medianValueOfTemperature;
         List<Double> values = new ArrayList<>();
