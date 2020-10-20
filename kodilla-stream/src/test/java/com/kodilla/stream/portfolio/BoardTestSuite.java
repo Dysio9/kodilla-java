@@ -92,10 +92,11 @@ class BoardTestSuite {
                 .flatMap(taskList -> taskList.getTasks().stream())
                 .map(Task::getCreated)
                 .mapToDouble(createdDate -> ChronoUnit.DAYS.between(createdDate, LocalDate.now()))
-                .reduce(0, (sum, current) -> (sum = sum + current));
+                .average().getAsDouble();
+
 
         //Then
-        assertEquals(30, average);
+        assertEquals(10, average);
     }
 
     private Board prepareTestData() {
