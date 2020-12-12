@@ -1,10 +1,17 @@
 package com.kodilla.good.patterns.food2door;
 
+import java.util.List;
+
 public class HealthyShop implements Shop {
     private OfferedProducts offeredProducts;
 
     public HealthyShop(OfferedProducts offeredProducts) {
         this.offeredProducts = offeredProducts;
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        return offeredProducts.getOfferedProducts();
     }
 
     @Override
@@ -18,5 +25,10 @@ public class HealthyShop implements Shop {
             System.out.println("We're not able to realize your order. Sorry.");
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "HealthyShop";
     }
 }

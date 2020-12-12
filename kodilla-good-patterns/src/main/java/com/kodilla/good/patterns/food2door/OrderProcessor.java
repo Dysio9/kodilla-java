@@ -4,18 +4,26 @@ import java.util.List;
 
 public class OrderProcessor {
     private final Order order;
-    private Shop shop;
-    private List<Shop> shops;
 
-
-    public OrderProcessor(Shop shop, Order order) {
-        this.shop = shop;
+    public OrderProcessor(Order order) {
         this.order = order;
     }
 
     public void realizeOrder() {
-        boolean status = shop.process(order);
+        ShopRetriever shopRetriever = new ShopRetriever();
+        List<Shop> shops = shopRetriever.retrieve();
 
-        System.out.println(status ? "\nOrder has been realized" : "\nOrder has not been realized");
+        System.out.println("Searching shop...");
+
+        try {
+            Shop foundShop = shops.stream()
+                    .filter(shop -> shop.getProducts().containsAll(order.getOrderedProducts().keySet()))
+                    .findFirst().get();
+            System.out.println(foundShop + " will realize your order \n");
+            boolean status = foundShop.process(order);
+            System.out.println(status ? "\nOrder has been realized" : "\nOrder has not been realized");
+        } catch (Exception e) {
+            System.out.println("No shop could realize your order!");
+        }
     }
 }
