@@ -2,13 +2,14 @@ package com.kodilla.good.patterns.flights;
 
 import java.time.LocalDateTime;
 
-public class Flight {
-    private String departureAirport;
-    private String arrivalAirport;
-    private LocalDateTime departureTime;
-    private LocalDateTime arrivalTime;
+public final class Flight {
+    private final String departureAirport;
+    private final String arrivalAirport;
+    private final LocalDateTime departureTime;
+    private final LocalDateTime arrivalTime;
 
-    public Flight(String departureAirport, String arrivalAirport, LocalDateTime departureTime, LocalDateTime arrivalTime) {
+    public Flight(final String departureAirport, final String arrivalAirport,
+                  final LocalDateTime departureTime, final LocalDateTime arrivalTime) {
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.departureTime = departureTime;

@@ -1,12 +1,13 @@
 package com.kodilla.good.patterns.flights;
 
+import java.util.List;
 import java.util.Set;
 
-public class Flights {
-    private Set<Flight> flights;
+public final class Flights {
+    private final List<Flight> flights;
 
 
-    public Flights(Set<Flight> flights) {
+    public Flights(final List<Flight> flights) {
         this.flights = flights;
     }
 
@@ -15,12 +16,12 @@ public class Flights {
         return true;
     }
 
-    public boolean addAllFlights(Set<Flight> sendFlights) {
+    public boolean addAllFlights(List<Flight> sendFlights) {
         flights.addAll(sendFlights);
         return true;
     }
 
-    public Set<Flight> getAllFlights() {
+    public List<Flight> getAllFlights() {
         return flights;
     }
 

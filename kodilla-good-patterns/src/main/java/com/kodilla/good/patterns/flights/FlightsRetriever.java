@@ -1,12 +1,12 @@
 package com.kodilla.good.patterns.flights;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class FlightsRetriever {
-    Set<Flight> flightsTmp = new HashSet<>();
+    List<Flight> flightsTmp = new ArrayList<>();
 
     public Flights retrieve() {
         Flight flight1 = new Flight(
@@ -83,11 +83,11 @@ public class FlightsRetriever {
                 "Warszawa",
                 "Lublin",
                 LocalDateTime.of(2020, 12, 3, 18, 30),
-                LocalDateTime.of(2020, 12, 3, 19, 0));
+                LocalDateTime.of(2020, 12, 3, 19, 2));
 
 
         flightsTmp.addAll(Arrays.asList(flight1, flight2, flight3, flight4, flight5, flight6, flight7, flight8,
-                flight9, flight10, flight11, flight12, flight13, flight14));
+                flight9, flight10, flight11, flight12, flight13, flight14, flight15));
 
         return new Flights(flightsTmp);
     }

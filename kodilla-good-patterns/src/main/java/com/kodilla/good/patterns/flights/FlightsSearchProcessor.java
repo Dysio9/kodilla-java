@@ -23,9 +23,9 @@ public class FlightsSearchProcessor implements TravelSearchService {
             System.out.print("Type name of the airport: ");
             String searchedAirport = scanner.nextLine();
             if (directFromTo.equals("from")) {
-                System.out.println(searchDirectFlightFrom(searchedAirport));
+                System.out.println(searchAllFlightsFrom(searchedAirport));
             } else {
-                System.out.println(searchDirectFlightTo(searchedAirport));
+                System.out.println(searchAllFlightsTo(searchedAirport));
             }
         } else if (directFromTo.equals("d") || directFromTo.equals("c")) {
             System.out.print("Type name of departure airport: ");
@@ -42,45 +42,42 @@ public class FlightsSearchProcessor implements TravelSearchService {
         }
     }
 
-    private Flights searchDirectFlightFrom (String departureAirport) {
-        Set<Flight> flightsTmp = flights.getAllFlights().stream()
+    private Flights searchAllFlightsFrom(String departureAirport) {
+        List<Flight> flightsTmp = flights.getAllFlights().stream()
                 .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         return new Flights(flightsTmp);
     }
 
-    private Flights searchDirectFlightTo (String arrivalAirport) {
-        Set<Flight> flightsTmp = flights.getAllFlights().stream()
+    private Flights searchAllFlightsTo(String arrivalAirport) {
+        List<Flight> flightsTmp = flights.getAllFlights().stream()
                 .filter(flight -> flight.getArrivalAirport().equals(arrivalAirport))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         return new Flights(flightsTmp);
     }
 
     private Flights searchDirectFlightFromTo (String departureAirport, String arrivalAirport) {
-        Set<Flight> flightsTmp = flights.getAllFlights().stream()
+        List<Flight> flightsTmp = flights.getAllFlights().stream()
                 .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
                 .filter(flight -> flight.getArrivalAirport().equals(arrivalAirport))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         return new Flights(flightsTmp);
     }
 
     private List<Flights> searchConnectingFlight (String departureAirport, String arrivalAirport) {
         List<Flights> foundFlights = new ArrayList<>();
-
-        Set<Flight> flightsFirst = flights.getAllFlights().stream()
-                .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
-                .collect(Collectors.toSet());
+        List<Flight> flightsFirst = searchAllFlightsFrom(departureAirport).getAllFlights();
 
         for (Flight flight : flightsFirst) {
-            Set<Flight>  flightsSecond = flights.getAllFlights().stream()
+            List<Flight>  flightsSecond = flights.getAllFlights().stream()
                     .filter(fl -> fl.getDepartureAirport().equals(flight.getArrivalAirport()))
                     .filter(fl -> fl.getArrivalAirport().equals(arrivalAirport))
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
 
             if (flightsSecond.size() != 0) {
                 for (Flight f : flightsSecond) {
                     if (flight.getArrivalTime().isBefore(f.getDepartureTime())) {
-                        Set<Flight> flightsConnecting = new HashSet<>();
+                        List<Flight> flightsConnecting = new ArrayList<>();
                         flightsConnecting.add(flight);
                         flightsConnecting.add(f);
                         foundFlights.add(new Flights(flightsConnecting));
