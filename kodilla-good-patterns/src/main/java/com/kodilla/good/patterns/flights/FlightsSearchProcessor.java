@@ -7,8 +7,7 @@ public class FlightsSearchProcessor implements TravelSearchService {
     Flights flights;
 
     public FlightsSearchProcessor() {
-        FlightsRetriever flightsRetriever = new FlightsRetriever();
-        this.flights = flightsRetriever.retrieve();
+        this.flights = FlightsRetriever.retrieve();
     }
 
     @Override
