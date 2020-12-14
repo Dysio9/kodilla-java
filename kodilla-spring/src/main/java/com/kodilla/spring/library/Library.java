@@ -10,17 +10,22 @@ import java.util.List;
 public class Library {
 
     private final List<String> books = new ArrayList<>();
-
-// -------- Wstrzykiwanie zależności właściwości klasy ----------
-    @Autowired
     private LibraryDbController libraryDbController;
 
+    public Library(LibraryDbController libraryDbController) {
+        this.libraryDbController = libraryDbController;
+    }
+
+    // -------- Wstrzykiwanie zależności właściwości klasy ----------
+//    @Autowired
+//    private LibraryDbController libraryDbController;
+//
 // --------- Wstrzykiwanie zależności przez konstruktor ---------
 //    @Autowired
 //    public Library(final LibraryDbController libraryDbController) {
 //        this.libraryDbController = libraryDbController;
 //    }
-
+//
 // ---------- Wstrzykiwanie zależnosni przez metodę -------------
 //    @Autowired
 //    public void setLibraryDbController(LibraryDbController libraryDbController) {
