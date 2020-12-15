@@ -13,18 +13,42 @@ public class CalculatorTestSuite {
     private Calculator calculator;
 
     @Test
-    public void testCalculations() {
+    public void testCalculationsSum() {
         //Given
         //When
         double sumResult = calculator.add(6,3);
-        double subResult = calculator.sub(6,3);
-        double mulResult = calculator.mul(6,3);
-        double divResult = calculator.div(6,3);
 
         //Then
         assertEquals(9, sumResult);
+    }
+
+    @Test
+    public void testCalculationsSub() {
+        //Given
+        //When
+        double subResult = calculator.sub(6,3);
+
+        //Then
         assertEquals(3, subResult);
+    }
+
+    @Test
+    public void testCalculationsMul() {
+        //Given
+        //When
+        double mulResult = calculator.mul(6,3);
+
+        //Then
         assertEquals(18, mulResult);
+    }
+
+    @Test
+    public void testCalculationsDiv() {
+        //Given
+        //When
+        double divResult = calculator.div(6,3);
+
+        //Then
         assertEquals(2, divResult);
     }
 }
