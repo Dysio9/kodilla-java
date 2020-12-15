@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class FlightsRetriever {
 
-    public static Flights retrieve() {
+    public static FlightWrapper retrieve() {
         Flight flight1 = new Flight(
                 "Lublin",
                 "Warszawa",
@@ -82,7 +82,7 @@ public class FlightsRetriever {
                 LocalDateTime.of(2020, 12, 3, 18, 30),
                 LocalDateTime.of(2020, 12, 3, 19, 2));
 
-        return new Flights(Arrays.asList(flight1, flight2, flight3, flight4, flight5, flight6, flight7, flight8,
+        return new FlightWrapper(Arrays.asList(flight1, flight2, flight3, flight4, flight5, flight6, flight7, flight8,
                 flight9, flight10, flight11, flight12, flight13, flight14, flight15));
     }
 }

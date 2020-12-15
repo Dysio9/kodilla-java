@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class FlightsSearchProcessor implements TravelSearchService {
-    Flights flights;
+    private FlightWrapper flights;
 
     public FlightsSearchProcessor() {
         this.flights = FlightsRetriever.retrieve();
@@ -41,30 +41,30 @@ public class FlightsSearchProcessor implements TravelSearchService {
         }
     }
 
-    private Flights searchAllFlightsFrom(String departureAirport) {
+    private FlightWrapper searchAllFlightsFrom(String departureAirport) {
         List<Flight> flightsTmp = flights.getAllFlights().stream()
                 .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
                 .collect(Collectors.toList());
-        return new Flights(flightsTmp);
+        return new FlightWrapper(flightsTmp);
     }
 
-    private Flights searchAllFlightsTo(String arrivalAirport) {
+    private FlightWrapper searchAllFlightsTo(String arrivalAirport) {
         List<Flight> flightsTmp = flights.getAllFlights().stream()
                 .filter(flight -> flight.getArrivalAirport().equals(arrivalAirport))
                 .collect(Collectors.toList());
-        return new Flights(flightsTmp);
+        return new FlightWrapper(flightsTmp);
     }
 
-    private Flights searchDirectFlightFromTo (String departureAirport, String arrivalAirport) {
+    private FlightWrapper searchDirectFlightFromTo (String departureAirport, String arrivalAirport) {
         List<Flight> flightsTmp = flights.getAllFlights().stream()
                 .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
                 .filter(flight -> flight.getArrivalAirport().equals(arrivalAirport))
                 .collect(Collectors.toList());
-        return new Flights(flightsTmp);
+        return new FlightWrapper(flightsTmp);
     }
 
-    private List<Flights> searchConnectingFlight (String departureAirport, String arrivalAirport) {
-        List<Flights> foundFlights = new ArrayList<>();
+    private List<FlightWrapper> searchConnectingFlight (String departureAirport, String arrivalAirport) {
+        List<FlightWrapper> foundFlights = new ArrayList<>();
         List<Flight> flightsFirst = searchAllFlightsFrom(departureAirport).getAllFlights();
 
         for (Flight flight : flightsFirst) {
@@ -79,7 +79,7 @@ public class FlightsSearchProcessor implements TravelSearchService {
                         List<Flight> flightsConnecting = new ArrayList<>();
                         flightsConnecting.add(flight);
                         flightsConnecting.add(f);
-                        foundFlights.add(new Flights(flightsConnecting));
+                        foundFlights.add(new FlightWrapper(flightsConnecting));
                     }
                 }
             }
