@@ -1,5 +1,6 @@
 package com.kodilla.spring.portfolio;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -21,10 +22,11 @@ public class BoardTestSuite {
         toDoTasks.addTask("Get sleep");
         inProgressTasks.addTask("Work hard");
         doneTasks.addTask("Rest");
+        Board board = context.getBean(Board.class);
+        String result = board.showBoard();
 
         //Then
-        Board board = context.getBean(Board.class);
-        board.showBoard();
+        Assertions.assertEquals("[Get sleep] - [Work hard] - [Rest]", result);
     }
 
 }
