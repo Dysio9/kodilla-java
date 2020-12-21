@@ -1,6 +1,5 @@
 package com.kodilla.patterns.prototype.library;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
