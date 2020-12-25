@@ -7,3 +7,5 @@ include 'spring-intro'
 include 'kodilla-spring'
 include 'kodilla-patterns'
 include 'kodilla-spring-web'
+include 'kodilla-jdbc'
+
