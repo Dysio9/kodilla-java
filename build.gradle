@@ -6,7 +6,13 @@ plugins {
 
 group = 'com.kodilla'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8.0_265'
+sourceCompatibility = '11'
+//sourceCompatibility = '1.8.0_265'
+
+// added to fix :bootJar property 'mainClass' error during build gradle when added kodilla-hibernate module
+bootJar {
+    mainClass = 'com.kodilla.hibernate'
+}
 
 repositories {
     mavenCentral()
