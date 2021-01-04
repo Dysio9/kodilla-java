@@ -12,10 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class TaskListDaoTestSuite {
 
+    static final String LISTNAME = "Example of list name";
+    static final String DESCRIPTION = "Example of TaskList name";
+
     @Autowired
     TaskListDao taskListDao;
-    private static final String LISTNAME = "Example of list name";
-    private static final String DESCRIPTION = "Example of TaskList name";
 
     @Test
     void testFindByListName() {
