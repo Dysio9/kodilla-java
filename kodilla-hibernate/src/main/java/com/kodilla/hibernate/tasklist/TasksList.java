@@ -5,16 +5,16 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TASKLIST")
-public class TaskList {
+@Table(name = "TASKSLIST")
+public class TasksList {
     private int id;
     private String listName;
     private String description;
 
-    public TaskList() {
+    public TasksList() {
     }
 
-    public TaskList(String listName, String description) {
+    public TasksList(String listName, String description) {
         this.listName = listName;
         this.description = description;
     }
@@ -53,9 +53,9 @@ public class TaskList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TaskList taskList = (TaskList) o;
-        return Objects.equals(listName, taskList.listName) &&
-                Objects.equals(description, taskList.description);
+        TasksList tasksList = (TasksList) o;
+        return Objects.equals(listName, tasksList.listName) &&
+                Objects.equals(description, tasksList.description);
     }
 
     @Override
